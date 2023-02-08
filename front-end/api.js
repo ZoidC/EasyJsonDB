@@ -16,16 +16,13 @@ export const getDatabaseContent = async () => {
         });
 };
 
-export const postContentToDatabase = async () => {
+export const postContentToDatabase = async (item) => {
     const method = "post";
     const headers = {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
     };
-    const body = JSON.stringify({
-        name: "Random Pokemon",
-        type: "Random Type"
-    });
+    const body = JSON.stringify(item);
 
     return fetch(URL, { method, headers, body })
         .then(async (response) => {
@@ -36,7 +33,7 @@ export const postContentToDatabase = async () => {
         });
 };
 
-export const removeToDatabase = async (id) => {
+export const removeToDatabase = async (item) => {
     if (!id) return;
 
     const method = "delete";
@@ -45,7 +42,7 @@ export const removeToDatabase = async (id) => {
         'Content-Type': 'application/json'
     };
 
-    return fetch(URL + "/" + id, { method, headers })
+    return fetch(URL + "/" + item.id, { method, headers })
         .then(async (response) => {
             return await response.json();
         })

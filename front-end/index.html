@@ -6,16 +6,26 @@
 </head>
 
 <body>
-    <p>
-        <button id="buttonPost">Add</button>
-    </p>
-    <form method="post">
+    <form id="addForm">
         <div>
-            <label for="toRemove">ID to remove</label>
-            <input type="text" id="toRemove">
+            <label for="name">Name</label>
+            <input type="text" name="name" id="name">
         </div>
-        <input id="buttonDelete" type="submit" value="Remove">
+        <div>
+            <label for="type">Type</label>
+            <input type="text" name="type" id="type">
+        </div>
+        <button id="addButton">Add</button>
     </form>
+    <hr />
+    <form id="removeForm">
+        <div>
+            <label for="id">ID</label>
+            <input type="text" name="id" id="id">
+        </div>
+        <button id="removeButton">Remove</button>
+    </form>
+    <hr />
     <div id="resultGet"></div>
     <script type="module" src="index.js"></script>
 </body>
