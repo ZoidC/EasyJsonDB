@@ -1,18 +1,23 @@
 import { getDatabaseContent, postContentToDatabase, removeToDatabase } from "./api.js";
 
 // Elements
+const addForm = document.querySelectorAll("#addForm input");
+const addButton = document.getElementById("addButton");
+
+const removeForm = document.querySelectorAll("#removeForm input");
+const removeButton = document.getElementById("removeButton");
+
 const resultGet = document.getElementById("resultGet");
-const toRemove = document.getElementById("toRemove");
-const buttonPost = document.getElementById("buttonPost");
-const buttonDelete = document.getElementById("buttonDelete");
 
 // Events
-buttonPost.addEventListener("click", (e) => {
-    postContentToDatabase();
-});
-buttonDelete.addEventListener("click", (e) => {
+addButton.addEventListener("click", (e) => {
     e.preventDefault();
-    removeToDatabase(toRemove.value);
+    postContentToDatabase(convertNodeToObject(addForm));
+});
+
+removeButton.addEventListener("click", (e) => {
+    e.preventDefault();
+    removeToDatabase(convertNodeToObject(removeForm));
 });
 
 // Main
@@ -21,6 +26,15 @@ getDatabaseContent().then((result) => {
 });
 
 // Functions
+const convertNodeToObject = (node) => {
+    return Array.from(node).reduce((result, input) => {
+        return {
+            ...result,
+            [input.id]: input.value
+        };
+    }, {});
+};
+
 const refreshList = (parent, result) => {
     let ul = document.createElement("ul");
     result.forEach((item) => {
